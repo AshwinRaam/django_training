@@ -1,34 +1,28 @@
-from django.db import models
 
-GENDER = [
-    ('F', 'Female'),
-    ('M', 'Male')
-]
+from django.db import models
 
 
 class Trainer(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=200)
     age = models.IntegerField()
-    email = models.EmailField()
+    email = models.EmailField(max_length=200)
     contact_no = models.CharField(max_length=13)
-    gender = models.CharField(max_length=1, choices=GENDER)
-    subject = models.CharField(max_length=30)
-
+    gender = models.CharField(max_length=10)
 
 class Trainee(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=20)
     age = models.IntegerField()
-    email = models.EmailField()
+    email = models.EmailField(max_length=200)
     contact_no = models.CharField(max_length=13)
-    gender = models.CharField(max_length=1, choices=GENDER)
-    exp = models.PositiveSmallIntegerField()
+    exp = models.PositiveIntegerField()
 
 
-class doubts(models.Model):
+class Doubts(models.Model):
     name = models.CharField(max_length=20)
     question = models.CharField(max_length=500)
     answer = models.CharField(max_length=500)
     question_from = models.ForeignKey(Trainee, on_delete=models.CASCADE)
     answer_by = models.ForeignKey(Trainer, on_delete=models.CASCADE)
-    when_asked = models.DateTimeField(auto_now_add=True)
+    when_asked = models.DateTimeField(auto_now=False, auto_now_add=False)
     status = models.CharField(max_length=20)
+
